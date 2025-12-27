@@ -3,11 +3,12 @@ Application that displays current wifi status on screen when user toggles wifi c
 
 ## To ensure status updates are immediate do either of the following
 
+
+<details>
+<summary><strong> Option 1 - Call method in init block of viewmodel and collect it in UI </strong></summary>
+
 ```
-//=========== Option 1 - Call method in init block of viewmodel and collect it in UI==========
-
 // In your VM
-
     init {
         checkMobileDataStatus()
     }
@@ -17,19 +18,24 @@ Application that displays current wifi status on screen when user toggles wifi c
  val state by viewModel.isMobileDataON.collectAsState()
 
  WifiConnectionStatusScreen(state)
+```
+</details> 
 
-// =========== Option 2 - Only call method in launched effect in UI===========
+
+
+<!--------------------New Break---------------------->
+<details>
+<summary><strong> Option 2 - Only call method in launched effect in UI </strong></summary>
+
+```
  val viewModel: WifiConnectionStatusViewModel = hiltViewModel()
  val state by viewModel.isMobileDataON.collectAsState()
 
   LaunchedEffect(Unit) {
     viewModel.checkMobileDataStatus()
 }
-
-````
-
-
-
+```
+</details> 
 
 
 Dev Proof
