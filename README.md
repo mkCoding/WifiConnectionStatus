@@ -10,12 +10,12 @@ Application that displays current wifi status on screen when user toggles wifi c
 ```
 // In your VM
     init {
-        checkMobileDataStatus()
+        checkWifiConnectionStatus()
     }
 
 // In your UI
  val viewModel: WifiConnectionStatusViewModel = hiltViewModel()
- val state by viewModel.isMobileDataON.collectAsState()
+ val state by viewModel.isWifiConnected.collectAsState()
 
  WifiConnectionStatusScreen(state)
 ```
@@ -29,10 +29,10 @@ Application that displays current wifi status on screen when user toggles wifi c
 
 ```
  val viewModel: WifiConnectionStatusViewModel = hiltViewModel()
- val state by viewModel.isMobileDataON.collectAsState()
+ val state by viewModel.isWifiConnected.collectAsState()
 
   LaunchedEffect(Unit) {
-    viewModel.checkMobileDataStatus()
+    viewModel.checkWifiConnectionStatus()
 }
 ```
 </details> 
