@@ -11,7 +11,7 @@ class WifiConnectionCheckRepo @Inject constructor(
 ) {
 
     private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    fun isMobileDataConnected(): Boolean {
+    fun isWifiConnected(): Boolean {
         val network = connectivityManager.activeNetwork ?: return false
         val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)

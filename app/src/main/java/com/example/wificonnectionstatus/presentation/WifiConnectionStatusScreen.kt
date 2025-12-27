@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun WifiConnectionStatusScreen(
-    mobileDataState:Boolean
+    wifiConnectedState:Boolean
 ){
     Column(
         modifier = Modifier
@@ -27,7 +27,7 @@ fun WifiConnectionStatusScreen(
 
         Text(
             fontSize = 40.sp,
-            text = when(mobileDataState){
+            text = when(wifiConnectedState){
                 true -> "Online"
                 false -> "Offline"
             }

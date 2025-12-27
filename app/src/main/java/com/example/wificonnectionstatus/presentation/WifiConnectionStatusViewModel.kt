@@ -2,15 +2,11 @@ package com.example.wificonnectionstatus.presentation
 
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.wificonnectionstatus.repository.WifiConnectionCheckRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,25 +14,25 @@ class WifiConnectionStatusViewModel @Inject constructor(
     private val repo: WifiConnectionCheckRepo
 ) : ViewModel() {
 
-    private val _isMobileDataON = MutableStateFlow(false)
-    val isMobileDataON: StateFlow<Boolean> = _isMobileDataON
+    private val _isWifiConnected = MutableStateFlow(false)
+    val isWifiConnected: StateFlow<Boolean> = _isWifiConnected
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
-            _isMobileDataON.value = true
+            _isWifiConnected.value = true
         }
 
         override fun onLost(network: Network) {
-            _isMobileDataON.value = false
+            _isWifiConnected.value = false
         }
     }
 
     init {
-        checkMobileDataStatus()
+        checkWifiConnectionStatus()
     }
 
-    fun checkMobileDataStatus() {
-        _isMobileDataON.value = repo.isMobileDataConnected()
+    fun checkWifiConnectionStatus() {
+        _isWifiConnected.value = repo.isWifiConnected()
         repo.getConnectivityManager()
             .registerDefaultNetworkCallback(networkCallback)
     }

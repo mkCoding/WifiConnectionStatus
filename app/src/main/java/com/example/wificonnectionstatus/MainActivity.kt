@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,7 +21,7 @@ class MainActivity : ComponentActivity() {
             WifiConnectionStatusTheme {
 
                 val viewModel: WifiConnectionStatusViewModel = hiltViewModel()
-                val state by viewModel.isMobileDataON.collectAsState()
+                val state by viewModel.isWifiConnected.collectAsState()
 
 //                LaunchedEffect(Unit) {
 //                    viewModel.checkMobileDataStatus()
